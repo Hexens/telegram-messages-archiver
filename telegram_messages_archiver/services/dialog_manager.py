@@ -8,16 +8,13 @@ from telegram_messages_archiver.models import Dialog
 class DialogManager:
 
     @classmethod
-    def get_dialog_by_original_id(cls, dialog_original_id) -> Dialog | None:
+    def get_dialog_by_original_id(cls, dialog_original_id: int) -> Dialog | None:
         with Database.get_db() as db:  # type: Session
-            stmt = (
-                select(Dialog)
-                .where(Dialog.dialog_original_id == dialog_original_id)
-            )
+            stmt = select(Dialog).where(Dialog.dialog_original_id == dialog_original_id)
             return db.scalars(stmt).first()
 
     @classmethod
-    def save_dialog(cls, dialog: Dialog):
+    def save_dialog(cls, dialog: Dialog) -> int:
         with Database.get_db() as db:  # type: Session
             db.add(dialog)
             db.commit()

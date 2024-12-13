@@ -18,3 +18,4 @@
 telegram_messages.txt
 *.session
 *.log
+media/*

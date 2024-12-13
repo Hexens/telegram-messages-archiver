@@ -11,4 +11,6 @@ timestamp = Annotated[
 
 
 class Base(DeclarativeBase):
-    created_at: Mapped[timestamp] = mapped_column(server_default=func.current_timestamp())
+    created_at: Mapped[timestamp] = mapped_column(
+        server_default=func.current_timestamp()
+    )
