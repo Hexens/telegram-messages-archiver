@@ -15,8 +15,49 @@ click = "^8.1.7"
 sqlalchemy = "^2.0.36"
 pymysql = "^1.1.1"
 colorlog = "^6.9.0"
+cryptography = "^44.0.0"
 
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+lint.select = ["E", "F", "S", "DJ", "W", "C4", "RET", "T20", "I"]
+exclude = [
+    "logs",
+    "media",
+    "*/tests.py",
+    "test*.py",
+    "./.venv",
+    "venv",
+    "*_pb2*"
+]
+
+[tool.black]
+line-length = 88
+exclude = '''
+(
+    .*_pb2.*
+)
+'''
+
+[tool.mypy]
+plugins = [
+    "pydantic.mypy",
+]
+python_version = "3.11"
+warn_return_any = true
+ignore_missing_imports = true
+warn_unused_configs = true
+exclude = [
+    '^.*/.cache/.*$',
+    '^test_scripts/*$',
+    '^media/*$',
+    '^logs/*$',
+    "./.venv",
+    "venv",
+    ".*_pb2.*"
+]
+
+skips = ["B105", "B113"]
