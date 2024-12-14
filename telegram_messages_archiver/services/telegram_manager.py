@@ -29,11 +29,6 @@ class TelegramManager:
     @classmethod
     async def run(cls, client):
         async for dialog_original in client.iter_dialogs():
-
-            # Debug
-            if dialog_original.id != 50493592:
-                continue
-
             logging.info(
                 "Telegram dialog: %s, id: %d", dialog_original.name, dialog_original.id
             )
@@ -46,18 +41,16 @@ class TelegramManager:
                     archived=dialog_original.archived,
                 )
                 DialogManager.save_dialog(dialog)
-            await cls.save_messages(
+
+            await cls.manage_messages(
                 tg_client=client,
                 dialog_entity=dialog_original.entity,
                 dialog_id=dialog.id,
                 dialog_original_id=dialog_original.id,
             )
 
-            # Debug return
-            return
-
     @classmethod
-    async def save_messages(
+    async def manage_messages(
         cls, tg_client, dialog_entity, dialog_id, dialog_original_id
     ):
         last_message = MessageManager.get_last_message(
@@ -74,8 +67,8 @@ class TelegramManager:
         original_messages = await tg_client.get_messages(
             entity=dialog_entity,
             limit=int(Config.message_limit),
-            # reverse=True,
-            # min_id=last_id
+            reverse=True,
+            min_id=last_id,
         )
 
         logging.debug(
@@ -89,6 +82,7 @@ class TelegramManager:
             original_messages, dialog_id, dialog_original_id
         )
 
+        # Uncomment this block after app will grou up alpha version
         # sleep(3)
         #
-        # await cls.save_messages(tg_client, dialog_entity, dialog_id, dialog_original_id)
+        # await cls.manage_messages(tg_client, dialog_entity, dialog_id, dialog_original_id)

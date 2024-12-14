@@ -1,8 +1,6 @@
 import logging
 import os
 
-from werkzeug.utils import secure_filename
-
 
 class FileManager:
     UPLOAD_FOLDER = "media"

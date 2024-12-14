@@ -19,7 +19,7 @@ class Message(Base):
 
     id: Mapped[int] = mapped_column(BigInteger, primary_key=True, autoincrement=True)
     dialog_id: Mapped[int] = mapped_column(BigInteger)
-    sender_id: Mapped[int] = mapped_column(BigInteger)
+    sender_id: Mapped[Optional[int]] = mapped_column(BigInteger, nullable=True)
     dialog_original_id: Mapped[int] = mapped_column(BigInteger)
     message_original_id: Mapped[int] = mapped_column(BigInteger)
     grouped_id: Mapped[Optional[int]] = mapped_column(BigInteger, nullable=True)
