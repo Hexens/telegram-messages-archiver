@@ -1,0 +1,12 @@
+# ... other configurations
+
+# Database credentials used in Docker
+POSTGRES_DB=telegram-messages-archiver
+POSTGRES_PASSWORD=
+DB_PORT=5432
+DB_DOCKER_PORT=54320
+
+# Data Source Name for connection to DB
+DSN=postgresql+psycopg2://postgres:${POSTGRES_PASSWORD}@localhost:${DB_DOCKER_PORT}/${POSTGRES_DB}
+
+# ... other configurations

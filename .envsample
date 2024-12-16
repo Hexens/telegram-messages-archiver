@@ -1,14 +1,24 @@
+# This is a sample .env file
+# Copy this file to .env and set the values as needed
+
+# Set to False in production
 DEBUG=True
 
+# Telegram API credentials
 API_ID=
 API_HASH=
 PHONE=
 
+# Database credentials used in Docker
 MYSQL_DATABASE=telegram-messages-archiver
 MYSQL_USER=user
 MYSQL_PASSWORD=
 MYSQL_ROOT_PASSWORD=
-DB_PORT=33006
+DB_PORT=3306
+DB_DOCKER_PORT=33006
 
-DSN=mysql+pymysql://${MYSQL_USER}:${MYSQL_PASSWORD}@localhost:${DB_PORT}/${MYSQL_DATABASE}
+# Data Source Name for connection to DB
+DSN=mysql+pymysql://${MYSQL_USER}:${MYSQL_PASSWORD}@localhost:${DB_DOCKER_PORT}/${MYSQL_DATABASE}
+
+# How many messages to fetch in one batch request
 MESSAGE_LIMIT=1
