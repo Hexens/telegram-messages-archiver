@@ -8,9 +8,7 @@ from telegram_messages_archiver.models.base import Base
 
 if TYPE_CHECKING:
     from telegram_messages_archiver.models.file import File
-if TYPE_CHECKING:
     from telegram_messages_archiver.models.contact import Contact
-if TYPE_CHECKING:
     from telegram_messages_archiver.models.web_page import WebPage
 
 

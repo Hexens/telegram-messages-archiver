@@ -2,7 +2,6 @@ import logging
 from time import sleep
 
 from telethon import TelegramClient
-from telethon.tl.custom import Message as OriginalMessage
 
 from telegram_messages_archiver.config import Config
 from telegram_messages_archiver.models import Dialog
@@ -10,7 +9,6 @@ from telegram_messages_archiver.services import DialogManager, MessageManager
 
 
 class TelegramManager:
-
     @classmethod
     def connect_to_telegram_and_run(cls):
         api_id = Config.api_id
@@ -28,6 +26,10 @@ class TelegramManager:
 
     @classmethod
     async def run(cls, client):
+        await cls.manage_dialogs(client)
+
+    @classmethod
+    async def manage_dialogs(cls, client):
         async for dialog_original in client.iter_dialogs():
             logging.info(
                 "Telegram dialog: %s, id: %d", dialog_original.name, dialog_original.id

@@ -51,7 +51,6 @@ class MessageManager:
             db.flush()
 
             if message_original.file:
-                logging.debug(f"File: {message_original.file}")
                 file = cls.map_file(message_original.file, message)
 
                 filepath = FileManager.make_path(
